@@ -30,3 +30,36 @@ exports.create = (req,res) => {
 
     })
 }
+
+/**
+ * Método para modificar los generos
+ * @param {*} req => Todo lo que se recibe
+ * @param {*} res => Respuesta que devuelve
+ */
+exports.update = (req,res) => {
+    if(Object.entries(req.body).length == 0){
+        return res,estatus(400).send({
+            message:'Todos los datos deben estar llenos'
+        })
+    }
+
+    const genre = {
+        name : req.body.name,
+        status: req.body.status
+    }
+
+   GenreModel.findByIdAndUpdate(req.params.id, genre, {new:true})
+
+    .then(
+        (genreUpdate) => {
+            res.send(genreUpdate)
+        }
+    )
+    .catch(
+        (error) => {
+            return res.status(500).send({
+                message: error.menssage
+            })
+        }
+    )
+}
