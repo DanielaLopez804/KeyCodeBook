@@ -14,6 +14,7 @@ conectDB() // estamos ejecutando el modelo de nuesta coneion a la base de datos
 
 require('./routers/user')(app)
 require('./routers/genre')(app)
+require('./routers/book')(app)
 
 app.listen(3000, () =>{
     console.log('Se levantó el servidor.....')
