@@ -72,4 +72,51 @@ exports.update = (req,res) => {
     )
 }
 
+/**
+ * Método para para listar todos los libros que estan en la plataforma
+ * @param {*} req => Todo lo que se recibe
+ * @param {*} res => Respuesta que devuelve
+ */
+
+exports.getAll =(req,res) =>{
+    BookModel.find() //Método el cual nos permite traer los datos de la coleccion con a que se tiene la relacion
+    .populate('genre')
+    .exec()
+    .then((books) => {res.send(books)})
+    .catch((error) => {
+        res.status(500).send({message: error.message})
+    })
+
+}
+
+/**
+ * Método para para listar un libro que estan en la plataforma
+ * @param {*} req => Todo lo que se recibe
+ * @param {*} res => Respuesta que devuelve
+ */
+
+exports.getOne =(req,res) =>{
+    
+    BookModel.findById(req.params.id) //Método el cual nos permite traer los datos de la coleccion con a que se tiene la relacion
+    .populate('genre')
+    .exec()
+    .then((books) => {res.send(books)})
+    .catch((error) => {
+        res.status(500).send({message: error.message})
+    })
+}
+
+/**
+ * Método para para eliminar un libro por el id
+ * @param {*} req => Todo lo que se recibe
+ * @param {*} res => Respuesta que devuelve
+ */
+
+exports.deleteOne =(req,res) =>{
+    BookModel.findByIdAndRemove(req.params.id)
+    .then((books) => {res.send(books)})
+    .catch((error) => {
+        res.status(500).send({message: error.message})
+    })
+}
 
