@@ -87,3 +87,42 @@ exports.update = (req, res) => {
             }
         )
 }
+
+/**
+ * Método para obtener todos los usuario
+ * @param {*} req => Todo lo que se recibe
+ * @param {*} res => Respuesta que devuelve
+ */
+
+exports.getAll =(req,res) =>{
+    
+    UserModel.find()
+    .then((users) => {res.send(users)})
+    .catch((error) => {
+        res.status(500).send({message: error.message})
+    })
+}
+
+/**
+ * Método para obtener un usuario
+ * @param {*} req => Todo lo que se recibe
+ * @param {*} res => Respuesta que devuelve
+ */
+
+exports.getOne=(req,res) =>{
+     UserModel.findById(req.params.id)
+
+     .then((user) => {res.send(user)})
+    .catch((error) => {
+        res.status(500).send({message: error.message})
+    })
+}
+
+exports.deleteOne =(req,res)=>{
+    UserModel.findByIdAndRemove(req.params.id)
+    .then((user) => {res.send(user)})
+    .catch((error) => {
+        res.status(500).send({message: error.message})
+    })
+}
+
