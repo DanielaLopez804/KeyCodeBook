@@ -1,5 +1,6 @@
 
 const UserModel = require('../models/user')
+const service = require('../services/index')
 
 /**
  * Método para CREAR un nuevo usuario
@@ -73,7 +74,7 @@ exports.update = (req, res) => {
      * -los datos nuevos
      */
 
-    UserModel.findByIdAndUpdate(req.params.id, user, {new:true})
+    UserModel.findByIdAndUpdate(req.params.id, user, { new: true })
         .then(
             (userUpdate) => {
                 res.send(userUpdate)
@@ -94,13 +95,13 @@ exports.update = (req, res) => {
  * @param {*} res => Respuesta que devuelve
  */
 
-exports.getAll =(req,res) =>{
-    
+exports.getAll = (req, res) => {
+
     UserModel.find()
-    .then((users) => {res.send(users)})
-    .catch((error) => {
-        res.status(500).send({message: error.message})
-    })
+        .then((users) => { res.send(users) })
+        .catch((error) => {
+            res.status(500).send({ message: error.message })
+        })
 }
 
 /**
@@ -109,20 +110,40 @@ exports.getAll =(req,res) =>{
  * @param {*} res => Respuesta que devuelve
  */
 
-exports.getOne=(req,res) =>{
-     UserModel.findById(req.params.id)
+exports.getOne = (req, res) => {
+    UserModel.findById(req.params.id)
 
-     .then((user) => {res.send(user)})
-    .catch((error) => {
-        res.status(500).send({message: error.message})
-    })
+        .then((user) => { res.send(user) })
+        .catch((error) => {
+            res.status(500).send({ message: error.message })
+        })
 }
 
-exports.deleteOne =(req,res)=>{
+exports.deleteOne = (req, res) => {
     UserModel.findByIdAndRemove(req.params.id)
-    .then((user) => {res.send(user)})
-    .catch((error) => {
-        res.status(500).send({message: error.message})
-    })
+        .then((user) => { res.send(user) })
+        .catch((error) => {
+            res.status(500).send({ message: error.message })
+        })
 }
 
+
+exports.login = (req, res) => {
+    UserModel.findOne({ email: req.body.email },
+        (error, dataUser) => {
+            if (dataUser != null) {
+                if (dataUser.password == req.body.password) {
+                    res.send({ token: service.createToken(dataUser) })
+                } else {
+                    res.status(400).send({
+                        message: 'Los datos no coinciden'
+                    })
+                }
+            } else {
+                res.status(400).send({
+                    message: 'Los datos no coinciden'
+                })
+            }
+        }
+    )
+}

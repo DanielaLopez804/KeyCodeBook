@@ -63,3 +63,20 @@ exports.update = (req,res) => {
         }
     )
 }
+
+exports.getAll =(req,res) =>{
+    GenreModel.find() //Método el cual nos permite traer los datos de la coleccion con a que se tiene la relacion
+    .then((genres) => {res.send(genres)})
+    .catch((error) => {
+        res.status(500).send({message: error.message})
+    })
+
+}
+
+exports.getOne =(req,res) =>{
+    GenreModel.findById(req.params.id) //Método el cual nos permite traer los datos de la coleccion con a que se tiene la relacion
+    .then((genres) => {res.send(genres)})
+    .catch((error) => {
+        res.status(500).send({message: error.message})
+    })
+}
