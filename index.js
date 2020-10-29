@@ -4,6 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const {conectDB} = require('./db')
+const port = process.env.PORT || 3000
 
 const app = express () // convertir a la constante express en un objeto por el cual vamos a poder trabajar 
 
@@ -16,6 +17,9 @@ require('./routers/user')(app)
 require('./routers/genre')(app)
 require('./routers/book')(app)
 
-app.listen(3000, () =>{
+app.listen(port, () =>{
     console.log('Se levantó el servidor.....')
 })
+
+
+

@@ -5,3 +5,4 @@ app.put ('/genre/update/:id', genre.update)
 app.get ('/genre/getOne/:id', genre.getOne)
 app.get ('/genre/getAll', genre.getAll)
 }
+
