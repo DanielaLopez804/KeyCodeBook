@@ -37,7 +37,7 @@ exports.decodeToken = (token) => {
     }catch{
         reject({
             status: 500,
-            message: 'E token es invalido'
+            message: 'El token es invalido'
         })}
         
     })
