@@ -2,7 +2,6 @@
 const UserModel = require('../models/user')
 const service = require('../services/index')
 
-
 /**
  * Método para CREAR un nuevo usuario
  * @param {*} req => Todo lo que enviamos desde el body (formulario)
