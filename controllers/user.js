@@ -1,7 +1,7 @@
 const UserModel = require('../models/user')
 const service = require('../services/index')
 const nodemailer = require ('nodemailer')
-const bcript = require('bcryptjs')
+const bcript = require('bcryptjs') 
 
 
 
