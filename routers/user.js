@@ -11,4 +11,5 @@ module.exports=(app) => {
     app.get('/sendEmail', user.SendEmail)
 }
 
-/**:id => Con los dos punto estamos indicando que es un parametro */
+
+/*:id => Con los dos punto estamos indicando que es un parametro */
