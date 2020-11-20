@@ -137,7 +137,7 @@ exports.login = (req, res) => {
         (error, dataUser) => {
             if (dataUser != null) {
                /*  if (dataUser.password == req.body.password) { */
-                if(bcript.compareSync(req.body.password)){
+                if(bcript.compareSync(req.body.password,dataUser.password)){
                     res.send({ token: service.createToken(dataUser) })
                 } else {
                     res.status(400).send({
