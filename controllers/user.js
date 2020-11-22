@@ -1,7 +1,7 @@
 const UserModel = require('../models/user')
 const service = require('../services/index')
 const nodemailer = require ('nodemailer')
-const bcript = require('bcryptjs')
+const bcript = require('bcryptjs') 
 
 
 
@@ -137,7 +137,7 @@ exports.login = (req, res) => {
         (error, dataUser) => {
             if (dataUser != null) {
                /*  if (dataUser.password == req.body.password) { */
-                if(bcript.compareSync(req.body.password)){
+                if(bcript.compareSync(req.body.password, dataUser.password)){
                     res.send({ token: service.createToken(dataUser) })
                 } else {
                     res.status(400).send({
@@ -154,7 +154,7 @@ exports.login = (req, res) => {
 }
 
 
-exports.SendEmail =(req,res) =>{
+exports.sendEmail =(req,res) =>{
     const email = req.query.email 
     const name = req.query.name
     requirements(email,name,res)
